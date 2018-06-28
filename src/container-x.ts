@@ -1,10 +1,6 @@
-/**
- * @name: container-x
- * @author: Phong Vu
- */
 import { Component, ReactNode } from 'react'
 
-export class Container<State = {}> {
+export class Container<State = object> {
 	state: State
 	listeners: Array<Function> = []
 	constructor(state: State) {
@@ -12,7 +8,7 @@ export class Container<State = {}> {
 	}
 	setState(nextState: State | ((prevState: State) => State), callback) {
 		this.state = Object.assign({}, this.state, nextState)
-		this.listeners.forEach(fn => fn(nextState))
+		return Promise.all(this.listeners.map(fn => fn(nextState)))
 	}
 	subscribe(fn: Function) {
 		this.listeners.push(fn)
@@ -32,7 +28,7 @@ export class Subscribe extends Component<{
 	componentWillUnmount() {
 		this.props.to.unsubscribe(this.onUpdate)
 	}
-	onUpdate = changes => {
+	onUpdate = (changes: object) => {
 		return new Promise(resolve => {
 			Object.keys(changes).some(k => this.props.bind.includes(k)) ? this.setState({}, resolve) : resolve()
 		})
