@@ -1,3 +1,7 @@
+/**
+ * @name: container-x
+ * @author: Phong Vu
+ */
 import { Component, ReactNode } from 'react'
 
 export class Container<State = {}> {
