@@ -8,7 +8,7 @@ class Container {
     }
     setState(updater, callback) {
         const nextState = typeof updater === 'function' ? updater(this.state) : updater;
-        Object.assign({}, this.state, nextState);
+        this.state = Object.assign({}, this.state, nextState);
         return Promise.all(this.listeners.map(fn => fn(nextState)));
     }
     subscribe(fn) {

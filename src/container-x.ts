@@ -8,7 +8,7 @@ export class Container<State = object> {
 	}
 	setState(updater: State | ((prevState: State) => State), callback) {
 		const nextState = typeof updater === 'function' ? updater(this.state) : updater
-		Object.assign({}, this.state, nextState)
+		this.state = Object.assign({}, this.state, nextState)
 		return Promise.all(this.listeners.map(fn => fn(nextState)))
 	}
 	subscribe(fn: Function) {
