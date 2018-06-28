@@ -22,4 +22,8 @@ const App = props => {
     </Subscribe>
   )
 }
+
+// Some places else
+
+store.setState({ foo: 'new value' }) // Magic happens
 ```
