@@ -1,6 +1,6 @@
 # container-x
 
-Inspired from the library unstated, but with different approach 
+Inspired from the library unstated, but with different approach and only written in 35 lines of code.
 
 ---
 
