@@ -6,8 +6,9 @@ class Container {
         this.listeners = [];
         this.state = state;
     }
-    setState(nextState, callback) {
-        this.state = Object.assign({}, this.state, nextState);
+    setState(updater, callback) {
+        const nextState = typeof updater === 'function' ? updater(this.state) : updater;
+        Object.assign({}, this.state, nextState);
         return Promise.all(this.listeners.map(fn => fn(nextState)));
     }
     subscribe(fn) {
@@ -21,11 +22,9 @@ exports.Container = Container;
 class Subscribe extends react_1.Component {
     constructor() {
         super(...arguments);
-        this.onUpdate = (changes) => {
-            return new Promise(resolve => {
-                Object.keys(changes).some(k => this.props.bind.includes(k)) ? this.setState({}, resolve) : resolve();
-            });
-        };
+        this.onUpdate = (changes) => new Promise(resolve => {
+            Object.keys(changes).some(k => this.props.bind.includes(k)) ? this.setState({}, resolve) : resolve();
+        });
     }
     componentDidMount() {
         this.props.to.subscribe(this.onUpdate);

@@ -26,4 +26,10 @@ const App = props => {
 // Some places else
 
 store.setState({ foo: 'new value' }) // Magic happens
+
+// Async setState
+
+store.setState({ foo: 'another value' }).then(() => {
+	// this is called after all listeners are resolved
+})
 ```
