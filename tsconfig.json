@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
+    "sourceMap": false,
     "noImplicitAny": false,
     "module": "commonjs",
     "target": "es2017",

@@ -37,4 +37,3 @@ class Subscribe extends react_1.Component {
     }
 }
 exports.Subscribe = Subscribe;
-//# sourceMappingURL=container-x.js.map
